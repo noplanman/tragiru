@@ -5,6 +5,7 @@ before_install: |
   docker pull gitlab/gitlab-runner:latest
   docker run --name gitlab-runner \
     -v "$(pwd)/config:/etc/gitlab-runner" \
+    -v "/var/run/docker.sock:/var/run/docker.sock" \
     -d gitlab/gitlab-runner:latest
 install: |
   sed -i "s#TOKEN#${GITLAB_TOKEN}#" config/config.toml
