@@ -5,7 +5,7 @@ check_interval = 0
   session_timeout = 1800
 
 [[runners]]
-  name = "travis-dind"
+  name = "NAME-dind"
   url = "URL"
   token = "TOKEN"
   executor = "docker"
