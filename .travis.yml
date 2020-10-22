@@ -1,15 +1,13 @@
 sudo: required
 services:
 - docker
-before_install: |
-  docker pull gitlab/gitlab-runner:latest
-  docker run --name gitlab-runner \
-    -v "$(pwd)/config:/etc/gitlab-runner" \
-    -v "/var/run/docker.sock:/var/run/docker.sock" \
-    -d gitlab/gitlab-runner:latest
-install: |
-  sed -i "s#NAME#${TRAVIS_BRANCH}#" config/config.toml
-  sed -i "s#TOKEN#$(eval echo \$GITLAB_TOKEN_${TRAVIS_BRANCH})#" config/config.toml
-  sed -i "s#URL#${GITLAB_URL}#" config/config.toml
+branches:
+  only:
+  - diamond
 script:
-- bash entrypoint.sh
+- bash worker.sh
+env:
+  global:
+  - secure: RxQ1qW05DnQaWTTgdeTqGtHEgqFsV/fpSn6BjJC4WcEjyaY53R2UZiVn+o68OXEuQaMzidW22Fd8hVaqr3jHw6ayJMrLaqPIVUyNmMDWaAq3yjKwoU63oTcra9P7m54u+zh5mV7t+HSxqFnrv/3bngi6Pr8+ibWXR/kW1rqL8daW73ilpf2EjtD5sE6ezbA8khyGKmsOh3Y07PAFsR9VzgPU5EBl8WkGOaFuTYLb7OrPUeXNi4Sr/p9v8LVZBwF3Jkis7Zt2fI3KECQIPloRXW5aI+vCntW/Ia5nVDjqc10YljPsndWN7BYrZUTdcAMdWnDGegeuWK9qD4bmVkkE893892+tKRZcizfHJIk/Vsz9Yh9voaqk0SXAgRA8tfmigNQz4rfA5NU/tpaxN9ddWP78xCHyB0wC2QUSJiCDOccLEPy9Tui0WmYuH36pbxKZfOd5Ntuj/WSaLi/r1x8Hf09jWCMuvYee/gAX3N7FNNHKB0A4DuOL0ngCpYUc8ElpxC4F/uxgSFXP4S7ytBIAgNc5XjrL31pSIZB+eiuiACyJll9ECJ15dYzwrZXx6K08RVauM8b7rNdXO8SIpYdVaxVDilHFVhnIn4xrYqtbbb2TpYrTT8r7QT342oVgPLpx11UE09RJ9O+d1VVQWWiQrksTTcoFT5/A5mPj20xwd1o=
+  - secure: KZrzPAY73weheBXLvtGekRiCLPq88QAhZIEcc1Hwnr71NrFJDB6Vfwpp12luzotzwUbp9/35+1GmIF4Ht55eyeRzoYzQCd+OKs16fhXdvmgcs0ZZALBNs+w1ST6fe9VchPQXGM3ANayVpQJT/pPHX+ws+qMSIjy6Q3J1Pa0BdhHCcbY+za5dYns2ysUWk+fdnG7bwQdcpWYBTsVFUmBS7qkmjFI68YBoGT2CEKyFwfhAkSLHja5XxMsRt8ToZ5sjJbwgbvtLXgLIYMv/B5hZ7tSgSnDGOxSyt6vT3ftJytgcVX1KgBzdk6L8sQrj6Krm7kAboiAx00o2vd2esMiWe8+a9djKeyAWo1AocpmYyX9mA57Tmx/f5m92VS9mojpIJxGhMgUtXTI+/xxMn5FTd6xikW6c5uYin+RcOrygcTJYSGV5tRow0KoZJanbnWrTr8SARLVhFFpvtn3uVHgief4IPbRNoW7ie4C6i6e/oftfxmcotxiffNsjU9uffLY+ItVpsZ4xH5siHNXOPwTqL0p2HfknlfhtMIDTZ3XkO46QXZG9vrM270VFcnws/FSEx0emYnUN3RheurkLTWSnZ1GIfXC2icXaZofTILcRLK187eOy1woJrbfK7Gpe5RWmJvcNbFsoTSjwMQ7fqnP/nH/6XAStT17kDXzJ/cPGI9M=
+  - secure: J53uBengZaWCifznh1qI8Xnpe5EKz5/Se9+nBXESd12o5Qx0IZLuu2X2XZBZEHaTG81S4WsAMYD54ybRO4XnMVhy5Ib2PzOlilEJWUZP+dS/5xd3EgHImCDIyVjLtYuueNnhBLzSY2xwBIQAEKxTId9ZvR/S2EC38u4FlESs05JClEvAuZsV0wxEYXKliLA4UyvaGe5WfD+fynJjREP36pOZAEaqh87R0zI/1py91iT7XdXiLEyqEEm+8WBTvVqH9+XQiXTokZKRpCB6Yw9KGoguaKvLhGj7x+9fqFiPFjTDX1b4SYDbVjKLoTjVUFuVNC/3j0FoUL1T9PYu502Io2IJcjsL8vDxmkXT5zpDmfDuw88iqOhtaGmDcBqqzIrqROY8jU2wTO55VFqCPV/GZfT0P1OQCg0MmEwuYGKFmND+IG2U0uKxKTjsnWIF3G5GswhlindXsH+y8T2hlgvE1/TvNii1vhzwNSWTM+ambT31cS4bNlLG+ihabyDFmeZDaXXUlo+++XU8xD2SkXkH0Hojk7Pieup5V3Bp4eJt2t1rixzC2CcQJlLRpRUKq16vgbAcxtAELsAhkF77Hv09BGURrxnkr7DPhOV+gZee+0s28j86imdH5X+wtCfAJvdEBhKqW5n2aEpu2dz9N3T6/U2PjVGionb0JaIBdAQTJNA=
