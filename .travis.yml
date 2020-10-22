@@ -1,11 +1,8 @@
 sudo: required
-services:
-- docker
-branches:
-  only:
-  - diamond
-script:
-- bash worker.sh
+services: [docker]
+branches: {only: [diamond]}
+script: [bash worker.sh]
+notifications: {email: false}
 env:
   global:
   - secure: RxQ1qW05DnQaWTTgdeTqGtHEgqFsV/fpSn6BjJC4WcEjyaY53R2UZiVn+o68OXEuQaMzidW22Fd8hVaqr3jHw6ayJMrLaqPIVUyNmMDWaAq3yjKwoU63oTcra9P7m54u+zh5mV7t+HSxqFnrv/3bngi6Pr8+ibWXR/kW1rqL8daW73ilpf2EjtD5sE6ezbA8khyGKmsOh3Y07PAFsR9VzgPU5EBl8WkGOaFuTYLb7OrPUeXNi4Sr/p9v8LVZBwF3Jkis7Zt2fI3KECQIPloRXW5aI+vCntW/Ia5nVDjqc10YljPsndWN7BYrZUTdcAMdWnDGegeuWK9qD4bmVkkE893892+tKRZcizfHJIk/Vsz9Yh9voaqk0SXAgRA8tfmigNQz4rfA5NU/tpaxN9ddWP78xCHyB0wC2QUSJiCDOccLEPy9Tui0WmYuH36pbxKZfOd5Ntuj/WSaLi/r1x8Hf09jWCMuvYee/gAX3N7FNNHKB0A4DuOL0ngCpYUc8ElpxC4F/uxgSFXP4S7ytBIAgNc5XjrL31pSIZB+eiuiACyJll9ECJ15dYzwrZXx6K08RVauM8b7rNdXO8SIpYdVaxVDilHFVhnIn4xrYqtbbb2TpYrTT8r7QT342oVgPLpx11UE09RJ9O+d1VVQWWiQrksTTcoFT5/A5mPj20xwd1o=
