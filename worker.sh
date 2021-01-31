@@ -25,6 +25,6 @@ curl -s -X POST \
     -H "Travis-API-Version: 3" \
     -H "Authorization: token ${TRAVIS_TOKEN}" \
     -d "{\"request\": {\"branch\":\"${TRAVIS_BRANCH}\"}}" \
-    https://api.travis-ci.org/repo/${ENCODED_SLUG}/requests
+    https://api.travis-ci.com/repo/${ENCODED_SLUG}/requests
 
 exit 0
